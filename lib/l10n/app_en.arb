@@ -1,0 +1,19 @@
+{
+  "to_do_list": "To Do List",
+  "add_new_task": "Add new Task",
+  "enter_your_task": "enter your task",
+  "enter_your_details": "enter your details",
+  "select_time": "Select time",
+  "done": "Done",
+  "delete": "delete",
+  "settings": "Settings",
+  "language": "Language",
+  "mode": "Mode",
+  "light": "Light",
+  "dark": "Dark",
+  "edit_task": "Edit Task",
+  "this_is_title": "This is title",
+  "task_details": "Task details",
+  "select_time": "Select time",
+  "save_changes": "Save Changes"
+}
