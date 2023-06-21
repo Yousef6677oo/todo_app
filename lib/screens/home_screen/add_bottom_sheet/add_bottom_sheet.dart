@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../utilities/app_color.dart';
 
 class AddBottomSheet extends StatefulWidget {
@@ -9,6 +8,9 @@ class AddBottomSheet extends StatefulWidget {
 }
 
 class _AddBottomSheetState extends State<AddBottomSheet> {
+  TextEditingController taskController = TextEditingController();
+  TextEditingController detailsController = TextEditingController();
+
   DateTime selectedDay = DateTime.now();
 
   @override
@@ -37,6 +39,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                 height: 10,
               ),
               TextField(
+                controller: taskController,
                 decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.enter_your_task,
                     labelStyle: Theme.of(context)
@@ -45,6 +48,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                         ?.copyWith(color: AppColor.hintColor)),
               ),
               TextField(
+                controller: detailsController,
                 decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.enter_your_details,
                     labelStyle: Theme.of(context)
@@ -80,7 +84,9 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.primaryColor),
-                  onPressed: () {},
+                  onPressed: () {
+                    onAddPressed();
+                  },
                   child: const Text("Add"))
             ],
           ),
@@ -97,5 +103,9 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
             lastDate: DateTime.now().add(const Duration(days: 365))) ??
         selectedDay);
     setState(() {});
+  }
+
+  void onAddPressed() {
+
   }
 }
