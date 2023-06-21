@@ -4,31 +4,63 @@ import 'app_color.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
-      primaryColor: AppColor.primaryColor,
-      scaffoldBackgroundColor: AppColor.accentColorLight,
+      canvasColor: AppColors.canvasColorLight,
+      primaryColor: AppColors.primaryColorLight,
+      scaffoldBackgroundColor: AppColors.accentColorLight,
       appBarTheme: AppBarTheme(
-          backgroundColor: AppColor.primaryColor,
+          backgroundColor: AppColors.primaryColorLight,
           elevation: 0,
           titleTextStyle: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: AppColor.white)),
+              color: AppColors.white)),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: AppColor.white,
+          backgroundColor: AppColors.white,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          selectedItemColor: AppColor.primaryColor,
-          unselectedItemColor: AppColor.titleColor),
+          selectedItemColor: AppColors.primaryColorLight,
+          unselectedItemColor: AppColors.titleColor),
       textTheme: TextTheme(
           titleLarge: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: AppColor.primaryColor),
+              color: AppColors.primaryColorLight),
           titleMedium: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.black),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: AppColors.black),
           titleSmall: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              color: AppColor.black)));
-  static ThemeData darkTheme = ThemeData();
+              color: AppColors.black)));
+  static ThemeData darkTheme = ThemeData(
+      canvasColor: AppColors.canvasColorDark,
+      primaryColor: AppColors.primaryColorLight,
+      scaffoldBackgroundColor: AppColors.accentColorDark,
+      appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.primaryColorDark,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: AppColors.black)),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.black,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: AppColors.primaryColorLight,
+          unselectedItemColor: AppColors.titleColor),
+      textTheme: TextTheme(
+          titleLarge: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primaryColorLight),
+          titleMedium: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primaryColorLight),
+          titleSmall: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.white)));
 }

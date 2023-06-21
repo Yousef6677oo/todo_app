@@ -10,7 +10,6 @@ class AddBottomSheet extends StatefulWidget {
 class _AddBottomSheetState extends State<AddBottomSheet> {
   TextEditingController taskController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-
   DateTime selectedDay = DateTime.now();
 
   @override
@@ -31,7 +30,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               Text(
                 AppLocalizations.of(context)!.add_new_task,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: AppColor.black,
+                      color: AppColors.black,
                     ),
                 textAlign: TextAlign.center,
               ),
@@ -45,7 +44,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleLarge
-                        ?.copyWith(color: AppColor.hintColor)),
+                        ?.copyWith(color: AppColors.hintColor)),
               ),
               TextField(
                 controller: detailsController,
@@ -54,7 +53,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleLarge
-                        ?.copyWith(color: AppColor.hintColor)),
+                        ?.copyWith(color: AppColors.hintColor)),
               ),
               const SizedBox(
                 height: 20,
@@ -62,7 +61,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               Text(AppLocalizations.of(context)!.select_time,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: AppColor.black,
+                    color: AppColors.black,
                       )),
               const SizedBox(
                 height: 10,
@@ -75,7 +74,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                     "${selectedDay.day}/${selectedDay.month}/${selectedDay.year}",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppColor.hintColor,
+                      color: AppColors.hintColor,
                         )),
               ),
               const SizedBox(
@@ -83,7 +82,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.primaryColor),
+                      backgroundColor: AppColors.primaryColorLight),
                   onPressed: () {
                     onAddPressed();
                   },
@@ -105,7 +104,5 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
     setState(() {});
   }
 
-  void onAddPressed() {
-
-  }
+  void onAddPressed() {}
 }

@@ -3,6 +3,8 @@
   "add_new_task": "Add new Task",
   "enter_your_task": "enter your task",
   "enter_your_details": "enter your details",
+  "change_current_theme": "Change Current Theme",
+  "change_current_language": "Change Current Language",
   "select_time": "Select time",
   "done": "Done",
   "delete": "delete",
@@ -14,6 +16,5 @@
   "edit_task": "Edit Task",
   "this_is_title": "This is title",
   "task_details": "Task details",
-  "select_time": "Select time",
   "save_changes": "Save Changes"
 }

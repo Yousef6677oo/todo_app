@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/utilities/app_color.dart';
 
-import '../tabs/list_tab.dart';
-import '../tabs/settings_tab.dart';
+import '../tabs/list/list_tab.dart';
+import '../tabs/settings/settings_tab.dart';
 import 'add_bottom_sheet/add_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,16 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: tabs[currentTab],
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColor.primaryColor,
+        backgroundColor: AppColors.primaryColorLight,
         onPressed: () {
           addNewTask();
         },
         shape: RoundedRectangleBorder(
-            side: BorderSide(width: 4, color: AppColor.white),
+            side: BorderSide(width: 4, color: AppColors.white),
             borderRadius: BorderRadius.circular(100)),
         child: Icon(
           Icons.add,
-          color: AppColor.white,
+          color: AppColors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

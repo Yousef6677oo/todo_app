@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/model/todo_dm.dart';
-import 'package:todo/screens/tabs/todo_widget.dart';
+import 'package:todo/screens/tabs/todo/todo_widget.dart';
 
 class ListTab extends StatelessWidget {
   @override

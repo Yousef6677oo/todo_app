@@ -1,8 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/model/todo_dm.dart';
 import 'package:todo/utilities/app_color.dart';
+
+import '../../../provider/settings_provider.dart';
 
 class TodoWidget extends StatefulWidget {
   TodoDM todo;
@@ -30,15 +32,17 @@ class _TodoWidgetState extends State<TodoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+
       ///
       child: Dismissible(
         movementDuration: const Duration(milliseconds: 500),
         resizeDuration: const Duration(milliseconds: 500),
         background: Container(
           decoration: BoxDecoration(
-              color: AppColor.red, borderRadius: BorderRadius.circular(15)),
+              color: AppColors.red, borderRadius: BorderRadius.circular(15)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
             child: Column(
@@ -46,12 +50,12 @@ class _TodoWidgetState extends State<TodoWidget> {
               children: [
                 ImageIcon(
                   const AssetImage("assets/icon_delete.png"),
-                  color: AppColor.white,
+                  color: AppColors.white,
                   size: 45,
                 ),
                 Text(
                   AppLocalizations.of(context)!.delete,
-                  style: TextStyle(fontSize: 14, color: AppColor.white),
+                  style: TextStyle(fontSize: 14, color: AppColors.white),
                 )
               ],
             ),
@@ -63,10 +67,14 @@ class _TodoWidgetState extends State<TodoWidget> {
             listItem.removeAt(0);
           });
         },
+
         ///
         child: Container(
           decoration: BoxDecoration(
-              color: AppColor.white, borderRadius: BorderRadius.circular(15)),
+              color: provider.currentTheme == ThemeMode.light
+                  ? AppColors.canvasColorLight
+                  : AppColors.canvasColorDark,
+              borderRadius: BorderRadius.circular(15)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -76,8 +84,8 @@ class _TodoWidgetState extends State<TodoWidget> {
                   height: 65,
                   width: 4,
                   color: widget.todo.isDone
-                      ? AppColor.green
-                      : AppColor.primaryColor,
+                      ? AppColors.green
+                      : AppColors.primaryColorLight,
                 ),
               ),
               Column(
@@ -91,25 +99,28 @@ class _TodoWidgetState extends State<TodoWidget> {
                     height: 5,
                   ),
                   Text(
-                      "${widget.todo.time.day}/${widget.todo.time.month}/${widget.todo.time.year}")
+                    "${widget.todo.time.day}/${widget.todo.time.month}/${widget.todo.time.year}",
+                    style: Theme.of(context).textTheme.titleSmall,
+                  )
                 ],
               ),
               Container(
                   decoration: BoxDecoration(
                       color: widget.todo.isDone
                           ? Colors.transparent
-                          : AppColor.primaryColor,
+                          : AppColors.primaryColorLight,
                       borderRadius: BorderRadius.circular(10)),
                   child: Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: 1, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 1, horizontal: 15),
                     child: ImageIcon(
                       AssetImage(widget.todo.isDone
                           ? "assets/done_list.png"
                           : "assets/icon_check.png"),
                       size: 40,
-                      color:
-                          widget.todo.isDone ? AppColor.green : AppColor.white,
+                      color: widget.todo.isDone
+                          ? AppColors.green
+                          : AppColors.white,
                     ),
                   ))
             ],
