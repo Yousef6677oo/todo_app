@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/utilities/app_color.dart';
-
 import '../../../provider/settings_provider.dart';
 
 class SettingsTab extends StatefulWidget {
@@ -30,7 +29,9 @@ class _SettingsTabState extends State<SettingsTab> {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.black),
+                    color: provider.currentTheme == ThemeMode.light
+                        ? AppColors.black
+                        : AppColors.white),
               ),
             ),
             InkWell(
@@ -50,7 +51,9 @@ class _SettingsTabState extends State<SettingsTab> {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.black),
+                    color: provider.currentTheme == ThemeMode.light
+                        ? AppColors.black
+                        : AppColors.white),
               ),
             ),
             InkWell(
@@ -76,7 +79,11 @@ class _SettingsTabState extends State<SettingsTab> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(selectionOption, style: Theme.of(context).textTheme.titleSmall),
+          Text(selectionOption,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .copyWith(color: const Color(0xff5D9CEC))),
           const Icon(Icons.arrow_drop_down)
         ],
       ),
@@ -105,7 +112,7 @@ class _SettingsTabState extends State<SettingsTab> {
                       },
                       child: getLanguageRow(
                           provider.currentLocal == "en", "English")),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   InkWell(
                       onTap: () {
                         provider.changeCurrentLocal(languageSelected: "ar");

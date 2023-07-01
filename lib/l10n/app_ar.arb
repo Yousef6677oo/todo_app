@@ -14,7 +14,8 @@
   "light": "مضء",
   "dark": "مظلم",
   "edit_task": "تعديل المهمة",
-  "this_is_title": "هذا هو العنوان",
+  "this_is_title": "عنوان المهمة",
   "task_details": "تفاصيل المهمة",
-  "save_changes": "حفظ التغييرات"
+  "save_changes": "حفظ التغييرات",
+  "add": "اضافة"
 }

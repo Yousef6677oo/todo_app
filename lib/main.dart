@@ -3,16 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/provider/settings_provider.dart';
+import 'package:todo/screens/edit_task_screen/edit_task_screen.dart';
 import 'package:todo/screens/home_screen/home_screen.dart';
+import 'package:todo/screens/login_screen/login_screen.dart';
+import 'package:todo/screens/register_screen/register_screen.dart';
 import 'package:todo/utilities/app_theme.dart';
 
-main() async{
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-  );
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await Firebase.initializeApp();
   runApp(ChangeNotifierProvider(
-      create: (_) => SettingsProvider(), child: const MyApp()));
+      create: (_) => SettingsProvider(
+          currentLocal: prefs.getString("isLanguageEnglish") ?? "en",
+          isDarkMode: prefs.getBool("isDarkMode") ?? false,
+          currentTheme: prefs.getBool("isDarkMode") ?? false
+              ? ThemeMode.dark
+              : ThemeMode.light),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +44,7 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
           AppLocalizations.delegate
         ],
-        supportedLocales: [
+        supportedLocales: const [
           Locale("en"),
           Locale("ar"), // English
         ],
@@ -43,8 +53,11 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           HomeScreen.routeName: (_) => HomeScreen(),
+          SettingsScreen.routeName: (_) => SettingsScreen(),
+          LoginScreen.routeName: (_) => LoginScreen(),
+          RegisterScreen.routeName: (_) => RegisterScreen()
         },
-        initialRoute: HomeScreen.routeName,
+        initialRoute: LoginScreen.routeName,
       ),
     );
   }

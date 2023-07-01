@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/model/user_dm.dart';
+
+import '../../../provider/settings_provider.dart';
 import '../../../utilities/app_color.dart';
 
 class AddBottomSheet extends StatefulWidget {
@@ -14,6 +19,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of(context);
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -30,7 +36,9 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               Text(
                 AppLocalizations.of(context)!.add_new_task,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: AppColors.black,
+                      color: provider.currentTheme == ThemeMode.light
+                          ? AppColors.black
+                          : AppColors.white,
                     ),
                 textAlign: TextAlign.center,
               ),
@@ -61,7 +69,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               Text(AppLocalizations.of(context)!.select_time,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColors.black,
+                        color: AppColors.black,
                       )),
               const SizedBox(
                 height: 10,
@@ -74,7 +82,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                     "${selectedDay.day}/${selectedDay.month}/${selectedDay.year}",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: AppColors.hintColor,
+                          color: AppColors.hintColor,
                         )),
               ),
               const SizedBox(
@@ -82,11 +90,16 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
                       backgroundColor: AppColors.primaryColorLight),
-                  onPressed: () {
-                    onAddPressed();
+                  onPressed: () async {
+                    await onAddPressed();
                   },
-                  child: const Text("Add"))
+                  child: Text(
+                    AppLocalizations.of(context)!.add,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w600),
+                  ))
             ],
           ),
         ),
@@ -104,5 +117,18 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
     setState(() {});
   }
 
-  void onAddPressed() {}
+  Future onAddPressed() async {
+    CollectionReference todos = FirebaseFirestore.instance
+        .collection('users')
+        .doc(UserDM.currentUser!.id)
+        .collection("todos");
+    DocumentReference doc = todos.doc();
+    return doc.set({
+      "id": doc.id,
+      "title": taskController.text,
+      "details": detailsController.text,
+      "isDone": false,
+      "dateTime": selectedDay.millisecondsSinceEpoch
+    }).then((value) => Navigator.pop(context));
+  }
 }
